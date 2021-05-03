@@ -1,4 +1,5 @@
 import React from 'react'
+import css from './style/labelinput.module.css'
 
 export default function LabelInput(props) {
     const label = props.myLabel;
@@ -11,7 +12,7 @@ export default function LabelInput(props) {
             <div className="col-12">
                 <label>{label}</label>
             </div>
-            <div className="col-12">
+            <div className={`${css} col-12`}>
                 <input type={type} name={name} defaultValue={value} onChange={ (event) => {props.onInputChange(event.target.value)}}/>
             </div>
         </>

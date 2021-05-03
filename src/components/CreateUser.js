@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 import css from './style/modal.module.css'
 
-function CreateUser(props) {    
+function CreateUser(props) {
     const [user, setUser] = useState({
         username: "",
         password: "",
@@ -79,8 +79,7 @@ function CreateUser(props) {
 
     useEffect(() => {
         const f = (focusedInput) ? focusedInput : "firstname";
-        console.log("focus", f);
-        const nextComponent = document.querySelector(`[name=${focusedInput}]`);
+        const nextComponent = document.querySelector(`[name=${f}]`);
         if(nextComponent)
             nextComponent.focus();        
     }, [focusedInput])    
