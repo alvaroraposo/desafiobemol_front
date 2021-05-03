@@ -33,7 +33,7 @@ function PaginaInicial() {
                 Cadastrar Novo Usuário
             </Button>
             
-            <Login backdrop="static" show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)}/>
+            <Login show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)}/>
             <CreateUser show={showModalCreateUser} onHide={onHideModalCreateUser}/>
         </>
     );

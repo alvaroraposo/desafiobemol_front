@@ -306,7 +306,6 @@ function CreateUser(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         className={css.modal}
-        backdrop="static"
         >
         <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter" className={css.modalTitle}>

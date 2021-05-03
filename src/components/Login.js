@@ -77,10 +77,9 @@ function Login(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            className={css.modal}  
-            enforceFocus={true}                              
+            className={css.modal}            
             >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter" className={css.modalTitle}>
                     Logar no Site
                 </Modal.Title>
