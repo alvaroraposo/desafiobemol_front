@@ -317,6 +317,7 @@ function CreateUser(props) {
                 <span>Dados Pessoais: </span>
                 <span name="dadosPessoaisErrorMSG">{errorMessages.dadosPessoaisErrorMSG}</span>
             </div>
+
             <LabelInput myLabel="Nome *" myName="firstname" myValue={user.firstname} onInputChange={(newFirstname) => {setUser({...user, firstname: newFirstname})}}/>
             <LabelInput myLabel="Sobrenome *" myName="lastname" myValue={user.lastname} onInputChange={(newLastname) => {setUser({...user, lastname: newLastname})}}/>
             <LabelInput myLabel="Data de Nascimento *" myName="birthdate" myType="date" myValue={user.lastname} onInputChange={(newBirthdate) => {

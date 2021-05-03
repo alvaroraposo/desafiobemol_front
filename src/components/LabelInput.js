@@ -1,5 +1,4 @@
 import React from 'react'
-import css from './style/labelinput.module.css'
 
 export default function LabelInput(props) {
     const label = props.myLabel;
