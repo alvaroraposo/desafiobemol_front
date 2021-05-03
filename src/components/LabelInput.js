@@ -6,6 +6,7 @@ export default function LabelInput(props) {
     const value = props.myValue;
     const type = (props.myType) ? props.myType : "text";
     const name = props.myName ? props.myName : "";
+    const maxlength = props.maxLength;
 
     return (
         <>
@@ -13,7 +14,7 @@ export default function LabelInput(props) {
                 <label>{label}</label>
             </div>
             <div className={`${css} col-12`}>
-                <input type={type} name={name} defaultValue={value} onChange={ (event) => {props.onInputChange(event.target.value)}}/>
+                <input type={type} name={name} defaultValue={value} onChange={ (event) => {props.onInputChange(event.target.value)}} maxLength={maxlength}/>
             </div>
         </>
     )

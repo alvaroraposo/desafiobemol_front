@@ -30,7 +30,7 @@ function PaginaInicial() {
 
         function onlyDigits(component) {
             setInputFilter(component, function(value) {
-                return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+                return /^\d*?\d*$/.test(value);
             });
         }
 

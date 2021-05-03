@@ -210,7 +210,7 @@ function CreateUser(props) {
             return false;
         }
 
-        if(user.fullAddress.type.length < 2) {
+        if(user.fullAddress.type.length < 2  || user.fullAddress.type.length > 20) {
             configErrorMessages("endereco", "Tipo de Residência inválido");
             setFocusedInput("type");
             return false;
@@ -317,8 +317,8 @@ function CreateUser(props) {
                 <span name="dadosPessoaisErrorMSG">{errorMessages.dadosPessoaisErrorMSG}</span>
             </div>
 
-            <LabelInput myLabel="Nome *" myName="firstname" myValue={user.firstname} onInputChange={(newFirstname) => {setUser({...user, firstname: newFirstname})}}/>
-            <LabelInput myLabel="Sobrenome *" myName="lastname" myValue={user.lastname} onInputChange={(newLastname) => {setUser({...user, lastname: newLastname})}}/>
+            <LabelInput myLabel="Nome *" myName="firstname" myValue={user.firstname} maxLength="30" onInputChange={(newFirstname) => {setUser({...user, firstname: newFirstname})}}/>
+            <LabelInput myLabel="Sobrenome *" myName="lastname" myValue={user.lastname} maxLength="30" onInputChange={(newLastname) => {setUser({...user, lastname: newLastname})}}/>
             <div className="row">
                 <div className="col-6">
                     <LabelInput myLabel="Data de Nascimento *" myName="birthdate" myType="date" myValue={user.lastname} onInputChange={(newBirthdate) => {
@@ -343,10 +343,10 @@ function CreateUser(props) {
             </div>            
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="CPF *" myName="cpf" myValue={user.cpf} onInputChange={(newCpf) => {setUser({...user, cpf: newCpf})}}/>            
+                    <LabelInput myLabel="CPF *" myName="cpf" maxLength="11" myValue={user.cpf} onInputChange={(newCpf) => {setUser({...user, cpf: newCpf})}}/>            
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="RG" myName="rg" myValue={user.rg} onInputChange={(newRg) => {setUser({...user, rg: newRg})}}/>
+                    <LabelInput myLabel="RG" myName="rg" maxLength="20" myValue={user.rg} onInputChange={(newRg) => {setUser({...user, rg: newRg})}}/>
                 </div>
             </div>            
             <div>
@@ -355,42 +355,42 @@ function CreateUser(props) {
             </div>
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="Tipo (Casa, Apartamento, etc..) *" myName="type" myValue={user.fullAddress.type} onInputChange={(newType) => {setUser({...user, fullAddress: {...user.fullAddress, type: newType}})}}/>
+                    <LabelInput myLabel="Tipo (Casa, Apartamento, etc..) *" maxLength="20" myName="type" myValue={user.fullAddress.type} onInputChange={(newType) => {setUser({...user, fullAddress: {...user.fullAddress, type: newType}})}}/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Nome e Sobrenome Destinatário" myName="owner" myValue={user.fullAddress.owner} onInputChange={(newOwner) => {setUser({...user, fullAddress: {...user.fullAddress, owner: newOwner}})}}/>  
+                    <LabelInput myLabel="Nome e Sobrenome Destinatário" maxLength="100" myName="owner" myValue={user.fullAddress.owner} onInputChange={(newOwner) => {setUser({...user, fullAddress: {...user.fullAddress, owner: newOwner}})}}/>  
                 </div>
             </div>                        
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="CEP *" myName="cep" myValue={user.fullAddress.cep} onInputChange={(newCep) => {setUser({...user, fullAddress: {...user.fullAddress, cep: newCep}})}}/>
+                    <LabelInput myLabel="CEP *" myName="cep" maxLength="8" myValue={user.fullAddress.cep} onInputChange={(newCep) => {setUser({...user, fullAddress: {...user.fullAddress, cep: newCep}})}}/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Endereço *" myName="address" myValue={user.fullAddress.address} onInputChange={(newAddress) => {setUser({...user, fullAddress: {...user.fullAddress, address: newAddress}})}}/>                    
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-6">
-                    <LabelInput myLabel="Número *" myName="number" myValue={user.fullAddress.number} onInputChange={(newNumber) => {setUser({...user, fullAddress: {...user.fullAddress, number: newNumber}})}}/>
-                </div>
-                <div className="col-6">
-                    <LabelInput myLabel="Complemento *" myName="complement" myValue={user.fullAddress.complement} onInputChange={(newComplement) => {setUser({...user, fullAddress: {...user.fullAddress, complement: newComplement}})}}/>
+                    <LabelInput myLabel="Endereço *" maxLength="100" myName="address" myValue={user.fullAddress.address} onInputChange={(newAddress) => {setUser({...user, fullAddress: {...user.fullAddress, address: newAddress}})}}/>                    
                 </div>
             </div>
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="Bairro *" myName="district" myValue={user.fullAddress.district} onInputChange={(newDistrict) => {setUser({...user, fullAddress: {...user.fullAddress, district: newDistrict}})}}/>            
+                    <LabelInput myLabel="Número *" maxLength="20" myName="number" myValue={user.fullAddress.number} onInputChange={(newNumber) => {setUser({...user, fullAddress: {...user.fullAddress, number: newNumber}})}}/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Cidade *" myName="city" myValue={user.fullAddress.city} onInputChange={(newCity) => {setUser({...user, fullAddress: {...user.fullAddress, city: newCity}})}}/>
+                    <LabelInput myLabel="Complemento *" maxLength="100" myName="complement" myValue={user.fullAddress.complement} onInputChange={(newComplement) => {setUser({...user, fullAddress: {...user.fullAddress, complement: newComplement}})}}/>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Bairro *" maxLength="100" myName="district" myValue={user.fullAddress.district} onInputChange={(newDistrict) => {setUser({...user, fullAddress: {...user.fullAddress, district: newDistrict}})}}/>            
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Cidade *" maxLength="100" myName="city" myValue={user.fullAddress.city} onInputChange={(newCity) => {setUser({...user, fullAddress: {...user.fullAddress, city: newCity}})}}/>
                 </div>
             </div>                                                
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="Estado *" myName="state" myValue={user.fullAddress.state} onInputChange={(newState) => {setUser({...user, fullAddress: {...user.fullAddress, state: newState}})}}/>
+                    <LabelInput myLabel="Estado *" myName="state" maxLength="2" myValue={user.fullAddress.state} onInputChange={(newState) => {setUser({...user, fullAddress: {...user.fullAddress, state: newState}})}}/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Referência *" myName="reference" myValue={user.fullAddress.reference} onInputChange={(newReference) => {setUser({...user, fullAddress: {...user.fullAddress, reference: newReference}})}}/>
+                    <LabelInput myLabel="Referência *" myName="reference" maxLength="100" myValue={user.fullAddress.reference} onInputChange={(newReference) => {setUser({...user, fullAddress: {...user.fullAddress, reference: newReference}})}}/>
                 </div>
             </div>                                                                                        
             <div>
@@ -399,10 +399,10 @@ function CreateUser(props) {
             </div>
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="Telefone Celular *" myName="cellphone" myValue={user.cellphone} onInputChange={(newCellphone) => {setUser({...user, cellphone: newCellphone})}}/>
+                    <LabelInput myLabel="Telefone Celular *" maxLength="20" myName="cellphone" myValue={user.cellphone} onInputChange={(newCellphone) => {setUser({...user, cellphone: newCellphone})}}/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Telefone Fixo" myName="fixedphone" myValue={user.fixedphone} onInputChange={(newFixedphone) => {setUser({...user, fixedphone: newFixedphone})}}/>
+                    <LabelInput myLabel="Telefone Fixo" maxLength="20" myName="fixedphone" myValue={user.fixedphone} onInputChange={(newFixedphone) => {setUser({...user, fixedphone: newFixedphone})}}/>
                 </div>
             </div>                                 
             
@@ -410,13 +410,13 @@ function CreateUser(props) {
                 <span>Dados da Conta: </span>
                 <span name="dadosDaContaErrorMSG">{errorMessages.dadosDaContaErrorMSG}</span>
             </div>
-            <LabelInput myLabel="E-Mail *" myName="username" myValue={user.username} onInputChange={(newUsername) => {setUser({...user, username: newUsername})}}/>
+            <LabelInput myLabel="E-Mail *" myName="username" maxLength="100" myValue={user.username} onInputChange={(newUsername) => {setUser({...user, username: newUsername})}}/>
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="Senha *" myType="password" myName="password" myValue={user.password} onInputChange={(newPassword) => {setUser({...user, password: newPassword})}}/>
+                    <LabelInput myLabel="Senha *" myType="password" maxLength="10" myName="password" myValue={user.password} onInputChange={(newPassword) => {setUser({...user, password: newPassword})}}/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Repetir Senha *" myType="password" myName="repeat" myValue={repeatPassword} onInputChange={(newRepeatPassword) => { setRepeatPassword(newRepeatPassword) }}/>
+                    <LabelInput myLabel="Repetir Senha *" myType="password" maxLength="10" myName="repeat" myValue={repeatPassword} onInputChange={(newRepeatPassword) => { setRepeatPassword(newRepeatPassword) }}/>
                 </div>
             </div> 
         </Modal.Body>
