@@ -320,59 +320,111 @@ function CreateUser(props) {
 
             <LabelInput myLabel="Nome *" myName="firstname" myValue={user.firstname} onInputChange={(newFirstname) => {setUser({...user, firstname: newFirstname})}}/>
             <LabelInput myLabel="Sobrenome *" myName="lastname" myValue={user.lastname} onInputChange={(newLastname) => {setUser({...user, lastname: newLastname})}}/>
-            <LabelInput myLabel="Data de Nascimento *" myName="birthdate" myType="date" myValue={user.lastname} onInputChange={(newBirthdate) => {
-                setUser({...user, birthdate: newBirthdate})                
-                const birthDateBR = newBirthdate.substring(8,10) + "/" + newBirthdate.substring(5,7) + "/" + newBirthdate.substring(0, 4);            
-                setBirthDateBR(birthDateBR)
-            }}/>
-            <div className={`row`}>
-                <div className="col-12">
-                    <label>Sexo *:</label>
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Data de Nascimento *" myName="birthdate" myType="date" myValue={user.lastname} onInputChange={(newBirthdate) => {
+                    setUser({...user, birthdate: newBirthdate})                
+                    const birthDateBR = newBirthdate.substring(8,10) + "/" + newBirthdate.substring(5,7) + "/" + newBirthdate.substring(0, 4);            
+                    setBirthDateBR(birthDateBR)
+                    }}/>
                 </div>
-                <div className="col-12">
-                    <select name="gender" defaultValue={"default"} onChange={(newGender) => {setUser({...user, gender: newGender.target.value})}}>
-                        <option value="default">Selecione</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                        <option value="outro">Outro</option>
-                    </select>
+                <div className="col-6 row">
+                    <div className="col-12">
+                        <label>Sexo *:</label>
+                    </div>
+                    <div className="col-12">
+                        <select name="gender" defaultValue={"default"} onChange={(newGender) => {setUser({...user, gender: newGender.target.value})}}>
+                            <option value="default">Selecione</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>                    
                 </div>
-            </div>
-            <LabelInput myLabel="CPF *" myName="cpf" myValue={user.cpf} onInputChange={(newCpf) => {setUser({...user, cpf: newCpf})}}/>
-            <LabelInput myLabel="RG" myName="rg" myValue={user.rg} onInputChange={(newRg) => {setUser({...user, rg: newRg})}}/>
+            </div>            
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="CPF *" myName="cpf" myValue={user.cpf} onInputChange={(newCpf) => {setUser({...user, cpf: newCpf})}}/>            
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="RG" myName="rg" myValue={user.rg} onInputChange={(newRg) => {setUser({...user, rg: newRg})}}/>
+                </div>
+            </div>            
             <div>
                 <span>Endereço: </span>
                 <span name="enderecoErrorMSG">{errorMessages.enderecoErrorMSG}</span>
             </div>
-            <LabelInput myLabel="Tipo (Casa, Apartamento, etc..) *" myName="type" myValue={user.fullAddress.type} onInputChange={(newType) => {setUser({...user, fullAddress: {...user.fullAddress, type: newType}})}}/>
-            <LabelInput myLabel="Nome e Sobrenome Destinatário" myName="owner" myValue={user.fullAddress.owner} onInputChange={(newOwner) => {setUser({...user, fullAddress: {...user.fullAddress, owner: newOwner}})}}/>
-            <LabelInput myLabel="CEP *" myName="cep" myValue={user.fullAddress.cep} onInputChange={(newCep) => {setUser({...user, fullAddress: {...user.fullAddress, cep: newCep}})}}/>
-            <LabelInput myLabel="Endereço *" myName="address" myValue={user.fullAddress.address} onInputChange={(newAddress) => {setUser({...user, fullAddress: {...user.fullAddress, address: newAddress}})}}/>
-            <LabelInput myLabel="Número *" myName="number" myValue={user.fullAddress.number} onInputChange={(newNumber) => {setUser({...user, fullAddress: {...user.fullAddress, number: newNumber}})}}/>
-            <LabelInput myLabel="Complemento *" myName="complement" myValue={user.fullAddress.complement} onInputChange={(newComplement) => {setUser({...user, fullAddress: {...user.fullAddress, complement: newComplement}})}}/>
-            <LabelInput myLabel="Bairro *" myName="district" myValue={user.fullAddress.district} onInputChange={(newDistrict) => {setUser({...user, fullAddress: {...user.fullAddress, district: newDistrict}})}}/>            
-            <LabelInput myLabel="Cidade *" myName="city" myValue={user.fullAddress.city} onInputChange={(newCity) => {setUser({...user, fullAddress: {...user.fullAddress, city: newCity}})}}/>
-            <LabelInput myLabel="Estado *" myName="state" myValue={user.fullAddress.state} onInputChange={(newState) => {setUser({...user, fullAddress: {...user.fullAddress, state: newState}})}}/>
-            <LabelInput myLabel="Referência *" myName="reference" myValue={user.fullAddress.reference} onInputChange={(newReference) => {setUser({...user, fullAddress: {...user.fullAddress, reference: newReference}})}}/>
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Tipo (Casa, Apartamento, etc..) *" myName="type" myValue={user.fullAddress.type} onInputChange={(newType) => {setUser({...user, fullAddress: {...user.fullAddress, type: newType}})}}/>
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Nome e Sobrenome Destinatário" myName="owner" myValue={user.fullAddress.owner} onInputChange={(newOwner) => {setUser({...user, fullAddress: {...user.fullAddress, owner: newOwner}})}}/>  
+                </div>
+            </div>                        
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="CEP *" myName="cep" myValue={user.fullAddress.cep} onInputChange={(newCep) => {setUser({...user, fullAddress: {...user.fullAddress, cep: newCep}})}}/>
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Endereço *" myName="address" myValue={user.fullAddress.address} onInputChange={(newAddress) => {setUser({...user, fullAddress: {...user.fullAddress, address: newAddress}})}}/>                    
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Número *" myName="number" myValue={user.fullAddress.number} onInputChange={(newNumber) => {setUser({...user, fullAddress: {...user.fullAddress, number: newNumber}})}}/>
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Complemento *" myName="complement" myValue={user.fullAddress.complement} onInputChange={(newComplement) => {setUser({...user, fullAddress: {...user.fullAddress, complement: newComplement}})}}/>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Bairro *" myName="district" myValue={user.fullAddress.district} onInputChange={(newDistrict) => {setUser({...user, fullAddress: {...user.fullAddress, district: newDistrict}})}}/>            
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Cidade *" myName="city" myValue={user.fullAddress.city} onInputChange={(newCity) => {setUser({...user, fullAddress: {...user.fullAddress, city: newCity}})}}/>
+                </div>
+            </div>                                                
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Estado *" myName="state" myValue={user.fullAddress.state} onInputChange={(newState) => {setUser({...user, fullAddress: {...user.fullAddress, state: newState}})}}/>
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Referência *" myName="reference" myValue={user.fullAddress.reference} onInputChange={(newReference) => {setUser({...user, fullAddress: {...user.fullAddress, reference: newReference}})}}/>
+                </div>
+            </div>                                                                                        
             <div>
                 <span>Dados de Contato: </span>
                 <span name="dadosDeContatoErrorMSG">{errorMessages.dadosDeContatoErrorMSG}</span>
             </div>
-            <LabelInput myLabel="Telefone Fixo" myName="fixedphone" myValue={user.fixedphone} onInputChange={(newFixedphone) => {setUser({...user, fixedphone: newFixedphone})}}/>
-            <LabelInput myLabel="Telefone Celular *" myName="cellphone" myValue={user.cellphone} onInputChange={(newCellphone) => {setUser({...user, cellphone: newCellphone})}}/>
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Telefone Celular *" myName="cellphone" myValue={user.cellphone} onInputChange={(newCellphone) => {setUser({...user, cellphone: newCellphone})}}/>
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Telefone Fixo" myName="fixedphone" myValue={user.fixedphone} onInputChange={(newFixedphone) => {setUser({...user, fixedphone: newFixedphone})}}/>
+                </div>
+            </div>                                 
+            
             <div>
                 <span>Dados da Conta: </span>
                 <span name="dadosDaContaErrorMSG">{errorMessages.dadosDaContaErrorMSG}</span>
             </div>
             <LabelInput myLabel="E-Mail *" myName="username" myValue={user.username} onInputChange={(newUsername) => {setUser({...user, username: newUsername})}}/>
-            <LabelInput myLabel="Senha *" myType="password" myName="password" myValue={user.password} onInputChange={(newPassword) => {setUser({...user, password: newPassword})}}/>
-            <LabelInput myLabel="Repetir Senha *" myType="password" myName="repeat" myValue={repeatPassword} onInputChange={(newRepeatPassword) => { setRepeatPassword(newRepeatPassword) }}/>
-
+            <div className="row">
+                <div className="col-6">
+                    <LabelInput myLabel="Senha *" myType="password" myName="password" myValue={user.password} onInputChange={(newPassword) => {setUser({...user, password: newPassword})}}/>
+                </div>
+                <div className="col-6">
+                    <LabelInput myLabel="Repetir Senha *" myType="password" myName="repeat" myValue={repeatPassword} onInputChange={(newRepeatPassword) => { setRepeatPassword(newRepeatPassword) }}/>
+                </div>
+            </div> 
+        </Modal.Body>
+        <Modal.Footer>
             <Button variant="primary" onClick={onCreateUserClick}>
                 Cadastrar Usuário
             </Button>
-        </Modal.Body>
-        <Modal.Footer>
             <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
         </Modal>

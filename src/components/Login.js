@@ -88,11 +88,11 @@ function Login(props) {
                 <span>{errorMessage}</span>
                 <LabelInput myLabel="E-Mail" myName="username" myValue={state.username} onInputChange={(newUsername) => {setState({...state, username: newUsername})}}/>
                 <LabelInput myLabel="Senha" myType="password" myName="password" myValue={state.password} onInputChange={(newPassword) => {setState({...state, password: newPassword})}}/>
+            </Modal.Body>
+            <Modal.Footer>
                 <Button variant="primary" onClick={onLoginClick}>
                     Entrar
                 </Button>
-            </Modal.Body>
-            <Modal.Footer>
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
