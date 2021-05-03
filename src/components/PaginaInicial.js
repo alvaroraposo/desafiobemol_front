@@ -26,14 +26,14 @@ function PaginaInicial() {
     return (
         <>
             <span>Bem-vindo(a) - {nomeUsuarioLogado}</span>
-            <Button variant="primary" onClick={() => setShowModalLogin(true)}>
+            <Button variant="primary" onClick={() => {setShowModalLogin(true); setShowModalCreateUser(false)}}>
                 Logar no Sistema
             </Button>
-            <Button variant="primary" onClick={() => setShowModalCreateUser(true)}>
+            <Button variant="primary" onClick={() => {setShowModalCreateUser(true); setShowModalLogin(false)}}>
                 Cadastrar Novo Usuário
             </Button>
             
-            <Login show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)}/>
+            <Login backdrop="static" show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)}/>
             <CreateUser show={showModalCreateUser} onHide={onHideModalCreateUser}/>
         </>
     );

@@ -4,6 +4,7 @@ import '../App.css';
 import LabelInput from './LabelInput';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
+import css from './style/modal.module.css'
 
 function CreateUser(props) {    
     const [user, setUser] = useState({
@@ -304,9 +305,11 @@ function CreateUser(props) {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        className={css.modal}
+        backdrop="static"
         >
         <Modal.Header>
-            <Modal.Title id="contained-modal-title-vcenter">
+            <Modal.Title id="contained-modal-title-vcenter" className={css.modalTitle}>
                 Logar no Site
             </Modal.Title>
         </Modal.Header>
