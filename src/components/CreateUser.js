@@ -86,7 +86,7 @@ function CreateUser(props) {
             nextComponent.focus();        
     }, [focusedInput])    
 
-    useEffect(() => {
+    /*useEffect(() => {
         const consultarCEP = async () => {
             const result = await axios.get(`https://viacep.com.br/ws/${user.fullAddress.cep}/json/`);
             
@@ -97,7 +97,7 @@ function CreateUser(props) {
             const district = result.data.bairro;
             const city = result.data.localidade;
             const state = result.data.uf;
-
+            console.log("state", state);
             setUser({...user, 
                 fullAddress: {
                     ...user.fullAddress,
@@ -111,8 +111,71 @@ function CreateUser(props) {
 
         if(user.fullAddress.cep && user.fullAddress.cep.length === 8)
             consultarCEP();
-    }, [(user) ? user.fullAddress.cep : null])
+    }, [(user) ? user.fullAddress.cep : null])*/
 
+/*    const onBlurCEP = () => {
+        
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((i) => {
+            if(i.name === "address") {
+                i.value = user.fullAddress.address;
+                console.log("address", i.value);
+            }
+                
+        })        
+        
+        consultarCEP();
+    }*/
+
+    const onBlurCEP = () => {        
+        const consultarCEP = async () => {
+
+            let newAddress = {
+                address: "",
+                district: "",
+                city: "",
+                state: ""
+            }
+    
+            if(user.fullAddress.cep.length === 8) {
+                const result = await axios.get(`https://viacep.com.br/ws/${user.fullAddress.cep}/json/`);
+            
+                if(!result || !result.data)
+                    return;
+        
+                newAddress = {
+                    address: result.data.logradouro,
+                    district: result.data.bairro,
+                    city: result.data.localidade,
+                    state: result.data.uf
+                }
+            }
+                        
+            setUser({...user, 
+                fullAddress: {
+                    ...user.fullAddress,
+                    ...newAddress
+                }
+            });
+
+            inputs.forEach((i) => {
+                if(i.name === "address") {
+                    i.value = newAddress.address;
+                }
+                else if(i.name === "district") {
+                    i.value = newAddress.district;
+                }
+                else if(i.name === "city") {
+                    i.value = newAddress.city;
+                }
+                else if(i.name === "state") {
+                    i.value = newAddress.state;
+                }                                    
+            })    
+        }
+
+        consultarCEP();        
+    }
 
     const validateUser = () => {
         function validateEmail(email) {
@@ -328,7 +391,7 @@ function CreateUser(props) {
             <LabelInput myLabel="Sobrenome *" myName="lastname" myValue={user.lastname} maxLength="30" onInputChange={(newLastname) => {setUser({...user, lastname: newLastname})}}/>
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="Data de Nascimento *" myName="birthdate" myType="date" myValue={user.lastname} onInputChange={(newBirthdate) => {
+                    <LabelInput myLabel="Data de Nascimento *" myName="birthdate" myType="date" myValue={user.birthdate} onInputChange={(newBirthdate) => {
                     setUser({...user, birthdate: newBirthdate})                
                     const birthDateBR = newBirthdate.substring(8,10) + "/" + newBirthdate.substring(5,7) + "/" + newBirthdate.substring(0, 4);            
                     setBirthDateBR(birthDateBR)
@@ -370,10 +433,30 @@ function CreateUser(props) {
             </div>                        
             <div className="row">
                 <div className="col-6">
-                    <LabelInput myLabel="CEP *" myName="cep" maxLength="8" myValue={user.fullAddress.cep} onInputChange={(newCep) => {setUser({...user, fullAddress: {...user.fullAddress, cep: newCep}})}}/>
+                    <LabelInput myLabel="CEP *" myName="cep" maxLength="8" myValue={user.fullAddress.cep} onBlur={onBlurCEP} onInputChange={(newCep) => {   
+                            console.log("inputchange", newCep.length);
+                            if(newCep.length !== 8) {
+                                console.log("esvaziando");
+                                setUser({...user, fullAddress: {
+                                    ...user.fullAddress, 
+                                    address: "",
+                                    city: "",
+                                    state: "",
+                                    district: "",
+                                }})
+                            }
+
+                            setUser({...user, fullAddress: {
+                                ...user.fullAddress,
+                                cep: newCep
+                            }})
+                        }
+                    }/>
                 </div>
                 <div className="col-6">
-                    <LabelInput myLabel="Endereço *" maxLength="100" myName="address" myValue={user.fullAddress.address} onInputChange={(newAddress) => {setUser({...user, fullAddress: {...user.fullAddress, address: newAddress}})}}/>                    
+                    <LabelInput myLabel="Endereço *" maxLength="100" myName="address" myValue={user.fullAddress.address} onInputChange={(newAddress) => {
+                        console.log("address", user.fullAddress.address);
+                        setUser({...user, fullAddress: {...user.fullAddress, address: newAddress}})}}/>
                 </div>
             </div>
             <div className="row">

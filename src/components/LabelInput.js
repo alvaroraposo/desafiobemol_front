@@ -14,7 +14,7 @@ export default function LabelInput(props) {
                 <label>{label}</label>
             </div>
             <div className={`${css} col-12`}>
-                <input type={type} name={name} defaultValue={value} onChange={ (event) => {props.onInputChange(event.target.value)}} maxLength={maxlength}/>
+                <input type={type} name={name} defaultValue={value} onBlur={props.onBlur} onChange={ (event) => {props.onInputChange(event.target.value)}} maxLength={maxlength}/>
             </div>
         </>
     )
