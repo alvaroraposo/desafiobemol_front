@@ -7,7 +7,7 @@ import { Modal } from 'react-bootstrap';
 import css from './style/modal.module.css'
 
 function CreateUser(props) {
-    const [user, setUser] = useState({
+    const emptyUser = {
         username: "",
         password: "",
         firstname: "",
@@ -33,7 +33,9 @@ function CreateUser(props) {
         scopes: [
             "users:access"
         ]
-    });
+    }
+
+    const [user, setUser] = useState(emptyUser);
     const [birthDateBR, setBirthDateBR] = useState("");
 /*    const [birthDateBR, setBirthDateBR] = useState("09/06/1982");
     
@@ -278,7 +280,7 @@ function CreateUser(props) {
             let result = ";"
             try {
                 result = await axios["post"](connectionString, {...user, birthdate: birthDateBR});
-                console.log("result", result);
+                setUser(emptyUser);
                 props.onHide();
             }
             catch(error) {
@@ -295,7 +297,12 @@ function CreateUser(props) {
         }    
         if(validateUser())
             await sendData();        
-    } 
+    }
+    
+    const onCloseClick = () => {
+        setUser(emptyUser);
+        props.onHide();
+    }
     
     return (
         
@@ -424,7 +431,7 @@ function CreateUser(props) {
             <Button variant="primary" onClick={onCreateUserClick}>
                 Cadastrar Usuário
             </Button>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button onClick={onCloseClick}>Close</Button>
         </Modal.Footer>
         </Modal>
     );
