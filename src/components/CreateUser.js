@@ -86,47 +86,6 @@ function CreateUser(props) {
             nextComponent.focus();        
     }, [focusedInput])    
 
-    /*useEffect(() => {
-        const consultarCEP = async () => {
-            const result = await axios.get(`https://viacep.com.br/ws/${user.fullAddress.cep}/json/`);
-            
-            if(!result || !result.data)
-                return;
-
-            const address = result.data.logradouro;
-            const district = result.data.bairro;
-            const city = result.data.localidade;
-            const state = result.data.uf;
-            console.log("state", state);
-            setUser({...user, 
-                fullAddress: {
-                    ...user.fullAddress,
-                    address,
-                    district,
-                    city,
-                    state
-                }
-            });
-        }
-
-        if(user.fullAddress.cep && user.fullAddress.cep.length === 8)
-            consultarCEP();
-    }, [(user) ? user.fullAddress.cep : null])*/
-
-/*    const onBlurCEP = () => {
-        
-        const inputs = document.querySelectorAll("input");
-        inputs.forEach((i) => {
-            if(i.name === "address") {
-                i.value = user.fullAddress.address;
-                console.log("address", i.value);
-            }
-                
-        })        
-        
-        consultarCEP();
-    }*/
-
     const onBlurCEP = () => {        
         const consultarCEP = async () => {
 
@@ -158,23 +117,34 @@ function CreateUser(props) {
                 }
             });
 
-            inputs.forEach((i) => {
-                if(i.name === "address") {
-                    i.value = newAddress.address;
-                }
-                else if(i.name === "district") {
-                    i.value = newAddress.district;
-                }
-                else if(i.name === "city") {
-                    i.value = newAddress.city;
-                }
-                else if(i.name === "state") {
-                    i.value = newAddress.state;
-                }                                    
-            })    
+            inputUpdate(newAddress);    
         }
 
         consultarCEP();        
+    }
+
+    const inputUpdate = (newAddress) => {
+        const inputs = document.querySelectorAll("input");
+
+        const nDistrict = newAddress !== "" ? newAddress.district : "";
+        const nCity = newAddress !== "" ? newAddress.city : "";
+        const nAddress = newAddress !== "" ? newAddress.address : "";
+        const nState = newAddress !== "" ? newAddress.state : "";
+
+        inputs.forEach((i) => {
+            if(i.name === "address") {
+                i.value = nAddress;
+            }
+            else if(i.name === "district") {
+                i.value = nDistrict;
+            }
+            else if(i.name === "city") {
+                i.value = nCity;
+            }
+            else if(i.name === "state") {
+                i.value = nState;
+            }                                    
+        })  
     }
 
     const validateUser = () => {
@@ -434,22 +404,12 @@ function CreateUser(props) {
             <div className="row">
                 <div className="col-6">
                     <LabelInput myLabel="CEP *" myName="cep" maxLength="8" myValue={user.fullAddress.cep} onBlur={onBlurCEP} onInputChange={(newCep) => {   
-                            console.log("inputchange", newCep.length);
-                            if(newCep.length !== 8) {
-                                console.log("esvaziando");
-                                setUser({...user, fullAddress: {
-                                    ...user.fullAddress, 
-                                    address: "",
-                                    city: "",
-                                    state: "",
-                                    district: "",
-                                }})
-                            }
-
                             setUser({...user, fullAddress: {
                                 ...user.fullAddress,
                                 cep: newCep
                             }})
+
+                            inputUpdate("");
                         }
                     }/>
                 </div>
