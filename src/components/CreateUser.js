@@ -37,39 +37,9 @@ function CreateUser(props) {
 
     const [user, setUser] = useState(emptyUser);
     const [birthDateBR, setBirthDateBR] = useState("");
-/*    const [birthDateBR, setBirthDateBR] = useState("09/06/1982");
-    
-    const [user, setUser] = useState({
-        username: "alvaroraposo@yahoo.com.br",
-        password: "123456",
-        firstname: "Alvaro",
-        lastname: "Raposo",
-        birthdate: "09/06/1982",
-        gender: "masculino",
-        cpf: "51169614272",
-        rg: "13895974",
-        cellphone: "996088120",
-        fixedphone: "",
-        fullAddress: {
-            type: "Casa",
-            owner: "Alvaro Raposo",
-            cep: "69040080",
-            address: "",
-            number: "39",
-            complement: "Condominio Solar dos Franceses 2",
-            district: "",
-            city: "",
-            state: "",
-            reference: "Arte Pedras"            
-        },
-        scopes: [
-            "users:access"
-        ]
-    });*/
-
-    const [focusedInput, setFocusedInput] = useState("firstname");
-
+    const [focusedInput, setFocusedInput] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
+    const [initialFocus, setInitialFocus] = useState(true);
 
     const [errorMessages, setErrorMessages] = useState({
         dadosPessoaisErrorMSG: "",
@@ -77,11 +47,55 @@ function CreateUser(props) {
         dadosDeContatoErrorMSG: "",
         dadosDaContaErrorMSG: "",
     })
+    
+    useEffect(() => {
+        function setInputFilter(textbox, inputFilter) {
+            ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+              textbox.addEventListener(event, function() {
+                if (inputFilter(this.value)) {
+                  this.oldValue = this.value;
+                  this.oldSelectionStart = this.selectionStart;
+                  this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                  this.value = this.oldValue;
+                  this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                  this.value = "";
+                }
+              });
+            });
+        }
 
+        function onlyDigits(component) {
+            setInputFilter(component, function(value) {
+                return /^\d*?\d*$/.test(value);
+            });
+        }
+
+        const comp = document.querySelector(`[name='cpf']`);
+        const comp2 = document.querySelector(`[name='cellphone']`);
+        const comp3 = document.querySelector(`[name='fixedphone']`);
+        const comp4 = document.querySelector(`[name='rg']`);
+        const comp5 = document.querySelector(`[name='cep']`);
+
+        if(comp && comp2 && comp3 && comp4 && comp5) {
+            onlyDigits(comp);
+            onlyDigits(comp2);
+            onlyDigits(comp3);
+            onlyDigits(comp4);
+            onlyDigits(comp5);
+        }            
+        
+        if(focusedInput !== "")
+            return;
+
+    })
 
     useEffect(() => {
-        const f = (focusedInput) ? focusedInput : "firstname";
+        console.log("nextComponentInput");
+        const f = (focusedInput || focusedInput != "") ? focusedInput : "firstname";
         const nextComponent = document.querySelector(`[name=${f}]`);
+
         if(nextComponent)
             nextComponent.focus();        
     }, [focusedInput])    
@@ -108,6 +122,8 @@ function CreateUser(props) {
                     city: result.data.localidade,
                     state: result.data.uf
                 }
+
+                setFocusedInput("number")
             }
                         
             setUser({...user, 
@@ -131,20 +147,10 @@ function CreateUser(props) {
         const nAddress = newAddress !== "" ? newAddress.address : "";
         const nState = newAddress !== "" ? newAddress.state : "";
 
-        inputs.forEach((i) => {
-            if(i.name === "address") {
-                i.value = nAddress;
-            }
-            else if(i.name === "district") {
-                i.value = nDistrict;
-            }
-            else if(i.name === "city") {
-                i.value = nCity;
-            }
-            else if(i.name === "state") {
-                i.value = nState;
-            }                                    
-        })  
+        document.querySelector(`[name=address]`).value = nAddress;
+        document.querySelector(`[name=district]`).value = nDistrict;
+        document.querySelector(`[name=city]`).value = nCity;
+        document.querySelector(`[name=state]`).value = nState;
     }
 
     const validateUser = () => {
@@ -345,6 +351,9 @@ function CreateUser(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         className={css.modal}
+        onEntered={() => { 
+            document.querySelector(`[name='firstname']`).focus();
+        }}
         >
         <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter" className={css.modalTitle}>

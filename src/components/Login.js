@@ -77,7 +77,10 @@ function Login(props) {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            className={css.modal}            
+            className={css.modal}
+            onEntered={() => { 
+                document.querySelector(`[name='username']`).focus();
+            }}
             >
             <Modal.Header>
                 <Modal.Title id="contained-modal-title-vcenter" className={css.modalTitle}>
