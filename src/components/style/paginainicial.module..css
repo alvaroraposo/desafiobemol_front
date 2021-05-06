@@ -1,0 +1,62 @@
+#headerRow {
+    background-color: #f8f9fa;
+}
+
+#headerRow nav {
+    padding: 0;
+}
+
+#headerRow .nav-link {
+    color: black;
+    font-size: 0.7em;
+    margin: 0 2px 0 0;
+}
+
+#logoRow {
+    background-color: #0092df;
+}
+
+#logoRow img {
+    width: 100%;
+    height: 100%;
+}
+
+#logoRow nav {
+    padding: 0;
+}
+
+#logoRow nav div {
+    padding: 0;
+}
+
+#logoRow h3 {
+    font-size: 0.9em;
+    color: white;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#logoRow p {
+    color: #ffee91;
+    font-weight: bold;
+    font-size: 0.8em;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#logoRow button {
+    font-size: 0.89em;
+    font-weight: bold;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #e63027;
+    padding: 0 25px;
+}
+
+#logoRow #logo img {
+    width: 50%;
+    height: 50%;
+}
+
