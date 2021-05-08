@@ -72,3 +72,31 @@
     height: 50%;
 }
 
+#menuRow {
+    background-color: #00a1e5;
+}
+
+#menuRow i {
+    color: white;
+    padding: 0;
+    font-size: 2em;
+}
+
+#menuRow p, span {
+    color: white;
+    font-size: 0.8em;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#menuRow nav {
+    padding: 0;
+}
+
+#menuRow span {
+    font-size: 0.6em;
+}
+
+#menuRow a {
+    text-align: center;
+}
