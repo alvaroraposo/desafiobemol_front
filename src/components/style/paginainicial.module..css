@@ -100,3 +100,20 @@
 #menuRow a {
     text-align: center;
 }
+
+#productRow {    
+    background-image: url(https://bemol.com.br/Custom/Content/Themes/Bemol/Templates/landings/lp-diadasmaes/images/bg-diadasmaes2.jpg);    
+}
+
+#productRow nav {
+    text-align: center;
+    align-items: center;
+}
+
+#productRow .card {
+    border: none;
+}
+
+#productRow img {
+    width: 100%;
+}
