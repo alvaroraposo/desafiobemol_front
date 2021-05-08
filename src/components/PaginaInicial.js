@@ -30,14 +30,17 @@ function PaginaInicial() {
                 <Container>
                     <Navbar bg="light" variant="dark" className="justify-content-between">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#lojas">Conheça nossas lojas</Nav.Link>                                                                
-                            <Nav.Link href="#cartao">Pague com Cartão Bemol</Nav.Link>                                    
-                            <Nav.Link href="#fale">Fale Conosco</Nav.Link>                                    
-                            <Nav.Link href="#televendas">Televendas: 0800 726 8300</Nav.Link>
-                            <Nav.Link href="#whatsapp">WhatsApp Vendas: (92) 98452-2238</Nav.Link>
+                            <Nav.Link href="#lojas"><i class="fas fa-map-marker-alt"></i> Conheça nossas lojas</Nav.Link>                                                                
+                            <Nav.Link href="#cartao"><i class="far fa-credit-card"></i> Pague com Cartão Bemol</Nav.Link>                                    
+                            <Nav.Link href="#fale"><i class="fas fa-phone-volume"></i> Fale Conosco</Nav.Link>                                    
+                            <Nav.Link href="#televendas"><i class="fas fa-phone-volume"></i> Televendas: 0800 726 8300</Nav.Link>
+                            <Nav.Link href="#whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Vendas: (92) 98452-2238</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#visite">Visite a Bemol Farma</Nav.Link>                                                                        
+                            <Nav.Link href="#visite">
+                                <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#farma" width="20" alt="Bemol Farma"/>
+                                <strong>Visite a Bemol Farma</strong>
+                            </Nav.Link>                                                                        
                         </Nav>
                     </Navbar>
                 </Container>
@@ -70,15 +73,29 @@ function PaginaInicial() {
                                 </Form.Row>                                                                
                             </Form>
                         </div>                        
-                        <div className="col-2">
-                            <Nav className="mr-auto">
-                                <Nav.Link href="#home"><p>Faça o  <strong>login</strong><br/>ou <strong>registre-se</strong></p></Nav.Link>
-                            </Nav>
+                        <div className="col-2 ml-3">
+                            <Form>
+                                <Form.Row>
+                                    <Col xs={2} className="pt-1 pb-1">
+                                        <i class="far fa-user-circle"></i>
+                                    </Col>
+                                    <Col className="ml-1">
+                                        <p>Faça o  <strong>login</strong><br/>ou <strong>registre-se</strong></p>
+                                    </Col>
+                                </Form.Row>                                                                
+                            </Form>                
                         </div>    
-                        <div className="col-2">
-                            <Nav className="mr-auto">
-                                <Nav.Link href="#pricing">Itens</Nav.Link>
-                            </Nav>
+                        <div className="col-2">                            
+                            <Form>
+                                <Form.Row>
+                                    <Col xs={2} className="mr-2">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </Col>
+                                    <Col xs={2}>
+                                        <p>(0)</p>
+                                    </Col>
+                                </Form.Row>                                                                
+                            </Form> 
                         </div>                                                                    
                     </Navbar>
                 </Container>
