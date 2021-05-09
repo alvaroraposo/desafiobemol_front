@@ -33,7 +33,7 @@ function ProductRow() {
                     </Carousel.Item>
                 </Carousel>
             </Container>
-            <Container className="mt-2">
+            <Container className="mt-2 mb-5">
                 <CardDeck>
                     <Card>
                         <Card.Img variant="top" src="images/card01.jpg" />                        

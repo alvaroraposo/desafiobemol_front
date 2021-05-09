@@ -54,7 +54,7 @@ function Login(props) {
                 const token = (result && result.data) ? result.data.token : null;
                 const firstname = (token && token.length > 5) ? result.data.firstname : null;
                 setErrorMessage("Login efetuado com sucesso");
-                setState({...state, token, firstname});
+                setState({username: "", password: "", token, firstname});
                 props.afterLogin(token, firstname);
                 props.onHide();
             }
@@ -78,7 +78,7 @@ function Login(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className={css.modal}
-            onEntered={() => { 
+            onEntered={() => {                 
                 document.querySelector(`[name='username']`).focus();
             }}
             >
@@ -91,12 +91,17 @@ function Login(props) {
                 <span>{errorMessage}</span>
                 <LabelInput myLabel="E-Mail" myName="username" myValue={state.username} onInputChange={(newUsername) => {setState({...state, username: newUsername})}}/>
                 <LabelInput myLabel="Senha" myType="password" myName="password" myValue={state.password} onInputChange={(newPassword) => {setState({...state, password: newPassword})}}/>
+                <div className="text-center">
+                    <Button variant="primary" onClick={onLoginClick} className="mt-2">
+                        Entrar
+                    </Button>
+                </div>                
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={onLoginClick}>
-                    Entrar
+                <Button variant="primary" onClick={props.onCreateUserClick}>
+                    Cadastrar Novo Usuário
                 </Button>
-                <Button onClick={props.onHide}>Close</Button>
+                <Button variant="light" onClick={props.onHide}>Fechar</Button>
             </Modal.Footer>
         </Modal>
          

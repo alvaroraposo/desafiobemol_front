@@ -1,3 +1,7 @@
+body {    
+    background-image: url(https://bemol.com.br/Custom/Content/Themes/Bemol/Templates/landings/lp-diadasmaes/images/bg-diadasmaes2.jpg);    
+}
+
 #headerRow {
     background-color: #f8f9fa;
 }
@@ -48,7 +52,7 @@
     height: 100%;
 }
 
-#logoRow p, span {
+#logoRow p, #logoRow span {
     color: #ffee91;
     font-weight: bold;
     font-size: 0.8em;
@@ -86,7 +90,7 @@
     font-size: 2em;
 }
 
-#menuRow p, span {
+#menuRow p, #menuRow span {
     color: white;
     font-size: 0.8em;
     padding: 0;
@@ -103,10 +107,6 @@
 
 #menuRow a {
     text-align: center;
-}
-
-#productRow {    
-    background-image: url(https://bemol.com.br/Custom/Content/Themes/Bemol/Templates/landings/lp-diadasmaes/images/bg-diadasmaes2.jpg);    
 }
 
 #productRow nav {

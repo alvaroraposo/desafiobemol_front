@@ -22,6 +22,11 @@ function PaginaInicial() {
         setShowModalCreateUser(false); 
     }
 
+    const onShowModalCreateUser = () => {
+        setShowModalCreateUser(true); 
+        setShowModalLogin(false);
+    }
+
     function setUserInfo(token, nomeUsuario) {
         setToken(token);
         setNomeUsuarioLogado(nomeUsuario);
@@ -88,7 +93,7 @@ function PaginaInicial() {
                                             </Dropdown.Toggle>                                            
 
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="#/action-1">Sair</Dropdown.Item>                                                        
+                                                <Dropdown.Item href="#/action-1" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>Sair</Dropdown.Item>                                                        
                                             </Dropdown.Menu>
                                         </Dropdown>                                            
                                     </>
@@ -112,18 +117,8 @@ function PaginaInicial() {
             </div>
             <MenuRow></MenuRow>            
             <ProductRow></ProductRow>            
-            <div>
-                <span>Bem-vindo(a) - {nomeUsuarioLogado}</span>            
-                <Button variant="primary" onClick={() => {setShowModalLogin(true); setShowModalCreateUser(false)}}>
-                    Logar no Sistema
-                </Button>
-                <Button variant="primary" onClick={() => {setShowModalCreateUser(true); setShowModalLogin(false)}}>
-                    Cadastrar Novo Usuário
-                </Button>
-                
-                <Login show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)}/>
-                <CreateUser show={showModalCreateUser} onHide={onHideModalCreateUser}/>
-            </div>
+            <Login show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)} onCreateUserClick={onShowModalCreateUser}/>
+            <CreateUser show={showModalCreateUser} onHide={onHideModalCreateUser}/>
         </>
     );
 }
