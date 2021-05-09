@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Button, Card, CardDeck, CardGroup, Carousel, Col, Container, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
+import { Button, Card, CardDeck, CardGroup, Carousel, Col, Container, Dropdown, DropdownButton, Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import '../App.css';
 import CreateUser from './CreateUser';
+import HeaderRow from './HeaderRow';
 import Login from './Login';
+import MenuRow from './MenuRow';
+import ProductRow from './ProductRow';
 import css from './style/paginainicial.module..css';
 
 function PaginaInicial() {
@@ -22,29 +25,12 @@ function PaginaInicial() {
     function setUserInfo(token, nomeUsuario) {
         setToken(token);
         setNomeUsuarioLogado(nomeUsuario);
+        console.log("Token - Nome", token, nomeUsuario);
     }
 
     return (
         <>
-            <div id="headerRow" className="justify-content-between">
-                <Container>
-                    <Navbar bg="light" variant="dark" className="justify-content-between">
-                        <Nav className="mr-auto">
-                            <Nav.Link href="#lojas"><i class="fas fa-map-marker-alt"></i> Conheça nossas lojas</Nav.Link>                                                                
-                            <Nav.Link href="#cartao"><i class="far fa-credit-card"></i> Pague com Cartão Bemol</Nav.Link>                                    
-                            <Nav.Link href="#fale"><i class="fas fa-phone-volume"></i> Fale Conosco</Nav.Link>                                    
-                            <Nav.Link href="#televendas"><i class="fas fa-phone-volume"></i> Televendas: 0800 726 8300</Nav.Link>
-                            <Nav.Link href="#whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Vendas: (92) 98452-2238</Nav.Link>
-                        </Nav>
-                        <Nav>
-                            <Nav.Link href="#visite">
-                                <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#farma" width="20" alt="Bemol Farma"/>
-                                <strong>Visite a Bemol Farma</strong>
-                            </Nav.Link>                                                                        
-                        </Nav>
-                    </Navbar>
-                </Container>
-            </div>
+            <HeaderRow></HeaderRow>
             <div id="logoRow">
                 <Container>
                     <Navbar variant="dark">
@@ -73,17 +59,41 @@ function PaginaInicial() {
                                 </Form.Row>                                                                
                             </Form>
                         </div>                        
-                        <div className="col-2 ml-3">
+                        <div id="divLogin" className="col-2 ml-3">
                             <Form>
-                                <Form.Row>
-                                    <Col xs={2} className="pt-1 pb-1">
-                                        <i class="far fa-user-circle"></i>
-                                    </Col>
-                                    <Col className="ml-1">
-                                        <p>Faça o  <strong>login</strong><br/>ou <strong>registre-se</strong></p>
-                                    </Col>
-                                </Form.Row>                                                                
-                            </Form>                
+                                {!token || token === "" ? 
+                                    (<Form.Row onClick={() => {setShowModalLogin(true); setShowModalCreateUser(false)}}>
+                                        <Col xs={2} className="pt-1 pb-1">
+                                            <i class="far fa-user-circle"></i>
+                                        </Col>
+                                        <Col className="ml-1" >
+                                            <p>Faça o  
+                                                <strong> login</strong><br/>
+                                                ou <strong>registre-se</strong>
+                                            </p> 
+                                        </Col>
+                                    </Form.Row>):
+                                    (       
+                                    <>
+                                        <Dropdown>                                            
+                                            <Dropdown.Toggle variant="success" id="dropdown-basic" as="p">                                                
+                                                <Form.Row>                                            
+                                                    <Col xs={2}>
+                                                        <i class="far fa-user-circle mt-2"></i>
+                                                    </Col>
+                                                    <Col id="colLoggedUser" className="mt-2">
+                                                        Olá, {nomeUsuarioLogado}                                               
+                                                    </Col>
+                                                </Form.Row>                                                                                        
+                                            </Dropdown.Toggle>                                            
+
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item href="#/action-1">Sair</Dropdown.Item>                                                        
+                                            </Dropdown.Menu>
+                                        </Dropdown>                                            
+                                    </>
+                                    )}                                    
+                            </Form>
                         </div>    
                         <div className="col-2">                            
                             <Form>
@@ -100,149 +110,9 @@ function PaginaInicial() {
                     </Navbar>
                 </Container>
             </div>
-            <div id="menuRow">
-                <Container>
-                    <Navbar variant="dark">
-                        <div className="col-2">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1"> 
-                                    <i class="fas fa-border-none"></i>                                    
-                                </Nav.Link>
-                                <Nav.Link>
-                                    <p>Compre por departamento</p>
-                                </Nav.Link>                                
-                            </Nav>
-                        </div> 
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#smartphone" width="40" alt="Smartphone"/>
-                                    <span className="mt-0">Celulares</span>
-                                </Nav.Link>                                
-                            </Nav> 
-                        </div>                            
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#eletro" width="40" alt="Eletro"/>
-                                    <span className="mt-0">Eletrodomésticos</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>      
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#chair" width="40" alt="Móveis"/>
-                                    <span className="mt-0">Móveis</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#info" width="40" alt="Informática"/>
-                                    <span className="mt-0">Informática</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#clima" width="40" alt="Climatização"/>
-                                    <span className="mt-0">Climatização</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#tv" width="40" alt="Tv e Vídeo"/>
-                                    <br/><span className="mt-0">TV e Vídeo</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>      
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#games" width="40" alt="Games"/>
-                                    <span className="mt-0">Games</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>   
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#oferta" width="40" alt="Ofertas"/>
-                                    <span className="mt-0">Ofertas</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>                 
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#bemolcard" width="40" alt="Cartão Bemol"/>
-                                    <span className="mt-0">Cartão Bemol</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>                                          
-                        <div className="col-1">
-                            <Nav className="mr-auto p-0">
-                                <Nav.Link href="#home" className="mt-1 mb-0 p-0"> 
-                                    <img src="https://d8xabijtzlaac.cloudfront.net/Custom/Content/Themes/Shared/Images/header/icons-svg.svg#presente" width="40" alt="Lista de Presentes"/>
-                                    <span className="mt-0">Presentes</span>
-                                </Nav.Link>                                
-                            </Nav>                                                        
-                        </div>                         
-                    </Navbar>
-                </Container>
-            </div>            
-            <div id="productRow">
-                <Container>
-                    <Nav className="justify-content-center">
-                        <a className="mt-2 mb-2"><img src="images/banner01.jpg"/></a>
-                    </Nav>
-                </Container>                                                
-                <Container>
-                    <Carousel>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="images/carrossel01.jpg"
-                            alt="First slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="images/carrossel02.jpg"
-                            alt="Second slide"
-                            />
-                        </Carousel.Item>
-                        <Carousel.Item>
-                            <img
-                            className="d-block w-100"
-                            src="images/carrossel03.jpg"
-                            alt="Third slide"
-                            />
-                        </Carousel.Item>
-                    </Carousel>
-                </Container>
-                <Container className="mt-2">
-                    <CardDeck>
-                        <Card>
-                            <Card.Img variant="top" src="images/card01.jpg" />                        
-                        </Card>
-                        <Card>
-                            <Card.Img variant="top" src="images/card02.jpg" />                        
-                        </Card>
-                        <Card>
-                            <Card.Img variant="top" src="images/card03.jpg" />                        
-                        </Card>
-                        <Card>
-                            <Card.Img variant="top" src="images/card04.jpg" />                        
-                        </Card>
-                    </CardDeck>            
-                </Container>
+            <MenuRow></MenuRow>            
+            <ProductRow></ProductRow>            
+            <div>
                 <span>Bem-vindo(a) - {nomeUsuarioLogado}</span>            
                 <Button variant="primary" onClick={() => {setShowModalLogin(true); setShowModalCreateUser(false)}}>
                     Logar no Sistema
@@ -253,7 +123,7 @@ function PaginaInicial() {
                 
                 <Login show={showModalLogin} onHide={onHideModalLogin} afterLogin={(token, nomeUsuario) => setUserInfo(token, nomeUsuario)}/>
                 <CreateUser show={showModalCreateUser} onHide={onHideModalCreateUser}/>
-            </div>            
+            </div>
         </>
     );
 }

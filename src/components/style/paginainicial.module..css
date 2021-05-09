@@ -56,6 +56,10 @@
     margin-bottom: 0;
 }
 
+#logoRow #colLoggedUser {
+    font-size: 1.3em;
+}
+
 #logoRow button {
     font-size: 0.89em;
     font-weight: bold;
@@ -116,4 +120,8 @@
 
 #productRow img {
     width: 100%;
+}
+
+#divLogin {
+    cursor: pointer;
 }
