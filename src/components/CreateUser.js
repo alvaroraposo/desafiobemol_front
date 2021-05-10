@@ -357,7 +357,7 @@ function CreateUser(props) {
         >
         <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter" className={css.modalTitle}>
-                Logar no Site
+                DADOS CADASTRAIS
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
