@@ -2,7 +2,7 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 
 function HeaderRow() {
     return (
-        <div id="headerRow" className="justify-content-between">
+        <div id="headerRow" className="justify-content-between d-none d-sm-flex">
             <Container>
                 <Navbar bg="light" variant="dark" className="justify-content-between">
                     <Nav className="mr-auto">

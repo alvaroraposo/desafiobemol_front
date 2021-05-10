@@ -53,7 +53,7 @@ function Login(props) {
                 const result = await axios["post"](connectionString, state);
                 const token = (result && result.data) ? result.data.token : null;
                 const firstname = (token && token.length > 5) ? result.data.firstname : null;
-                setErrorMessage("Login efetuado com sucesso");
+                setErrorMessage("");
                 setState({username: "", password: "", token, firstname});
                 props.afterLogin(token, firstname);
                 props.onHide();
@@ -101,7 +101,7 @@ function Login(props) {
                 <Button variant="primary" onClick={props.onCreateUserClick}>
                     Cadastrar Novo Usuário
                 </Button>
-                <Button variant="light" onClick={props.onHide}>Fechar</Button>
+                <Button variant="light" onClick={() => {setErrorMessage(""); props.onHide()}}>Fechar</Button>
             </Modal.Footer>
         </Modal>
          

@@ -1,9 +1,16 @@
 .modal {
-    max-width: 50%;
-    min-width: 50%;
+    max-width: 80%;
+    min-width: 80%;
+    transform: translateX(12%);
+
+    @media (min-width: 1200px) {
+        max-width: 50%;
+        min-width: 50%;
+        transform: translateX(50%);
+     }
+     
     margin: auto;
-    position: absolute;
-    transform: translateX(50%);
+    position: absolute;    
     padding: 0;
 }
 
