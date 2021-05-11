@@ -79,18 +79,21 @@ function PaginaInicial() {
                                                             Olá, {nomeUsuarioLogado}                                               
                                                         </Col>
                                                     </Form.Row>                                                                                        
+                                                    <Form.Row>                                            
+                                                        <Col xs={2}>
+                                                            <i class="far fa-times-circle"></i>
+                                                        </Col>
+                                                        <Col id="colLoggedUser" className="mt-2" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>
+                                                            Logout                                              
+                                                        </Col>
+                                                    </Form.Row> 
                                                 </Dropdown.Toggle>                                            
-
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item href="#/action-1" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>Sair</Dropdown.Item>                                                        
-                                                </Dropdown.Menu>
                                             </Dropdown>                                            
                                         </>
                                         )}                                    
                                 </Form>
                             </div>    
-                        </Nav.Link>
-                        
+                        </Nav.Link>                        
                         </Nav>
                     </Navbar.Collapse>
                     <div className="col-10 p-0 pr-1">
@@ -158,7 +161,7 @@ function PaginaInicial() {
                                             </Dropdown.Toggle>                                            
 
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="#/action-1" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>Sair</Dropdown.Item>                                                        
+                                                <Dropdown.Item href="#/action-1" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>Logout</Dropdown.Item>                                                        
                                             </Dropdown.Menu>
                                         </Dropdown>                                            
                                     </>
