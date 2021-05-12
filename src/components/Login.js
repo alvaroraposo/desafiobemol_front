@@ -60,6 +60,7 @@ function Login(props) {
             }
             catch(error) {
                 console.log(error)
+                props.afterLogin("", "");
                 if(error.response.status === 401) {
                     setFocusedInput("username");
                     setErrorMessage("Login ou Senha não autorizados");

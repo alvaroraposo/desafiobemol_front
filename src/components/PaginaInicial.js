@@ -6,13 +6,19 @@ import HeaderRow from './HeaderRow';
 import Login from './Login';
 import MenuRow from './MenuRow';
 import ProductRow from './ProductRow';
+import Cookies from 'universal-cookie';
 import css from './style/paginainicial.module..css';
 
 function PaginaInicial() {
     const [showModalLogin, setShowModalLogin] = useState(false);
     const [showModalCreateUser, setShowModalCreateUser] = useState(false);
-    const [token, setToken] = useState("");
-    const [nomeUsuarioLogado, setNomeUsuarioLogado] = useState("");
+    
+    const cookies = new Cookies();
+    const data = cookies.get('desafiobemoluser');
+    let [n,t] = (data && data !== "") ? data.split('&') : ["", ""];
+    
+    const [token, setToken] = useState(t);
+    const [nomeUsuarioLogado, setNomeUsuarioLogado] = useState(n);
 
     const onHideModalLogin = () => {
         setShowModalLogin(false); 
@@ -30,8 +36,21 @@ function PaginaInicial() {
     function setUserInfo(token, nomeUsuario) {
         setToken(token);
         setNomeUsuarioLogado(nomeUsuario);
-        console.log("Token - Nome", token, nomeUsuario);
+
+        const cookies = new Cookies();
+
+        console.log(token, nomeUsuario);
+        if(token === "" || nomeUsuario === "")
+        {
+            cookies.remove('desafiobemoluser');
+        }
+        else {
+            const currentDate = new Date();
+            const expiringDate = new Date(currentDate.getTime() + 5*60000);
+            cookies.set('desafiobemoluser', `${nomeUsuario}&${token}`, {path: '/', expires: expiringDate});
+        }                
     }
+    
 
     return (
         <>
@@ -83,7 +102,7 @@ function PaginaInicial() {
                                                         <Col xs={2}>
                                                             <i class="far fa-times-circle"></i>
                                                         </Col>
-                                                        <Col id="colLoggedUser" className="mt-2" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>
+                                                        <Col id="colLoggedUser" className="mt-2" onClick={() => {setUserInfo("", "")}}>
                                                             Logout                                              
                                                         </Col>
                                                     </Form.Row> 
@@ -161,7 +180,7 @@ function PaginaInicial() {
                                             </Dropdown.Toggle>                                            
 
                                             <Dropdown.Menu>
-                                                <Dropdown.Item href="#/action-1" onClick={() => {setToken(""); setNomeUsuarioLogado("")}}>Logout</Dropdown.Item>                                                        
+                                                <Dropdown.Item href="#/action-1" onClick={() => {setUserInfo("", "")}}>Logout</Dropdown.Item>                                                        
                                             </Dropdown.Menu>
                                         </Dropdown>                                            
                                     </>
