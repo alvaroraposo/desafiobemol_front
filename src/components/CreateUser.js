@@ -483,7 +483,7 @@ function CreateUser(props) {
             <Button variant="primary" onClick={onCreateUserClick}>
                 Cadastrar Usuário
             </Button>
-            <Button onClick={onCloseClick}>Close</Button>
+            <Button onClick={onCloseClick}>Fechar</Button>
         </Modal.Footer>
         </Modal>
     );
